@@ -23,17 +23,20 @@ Basic ones
     - Golang Code itself
 - Update Vault HTTP API Client Golang Package Version (`github.com/hashicorp/vault/api`)
   - This would bring minor changes or major breaking changes to the usage of the package, depending on the Golang package version upgrade. What this would help in is - Support more Vault versions in case there are changes in the Vault HTTP API in the newer Vault versions. Remember that Vault version is different from the Vault HTTP API version and Vault HTTP API may not change though Vault can have changes. And if HTTP API hasn't changed - ideally HTTP API behavior also shouldn't have changed but that may not be the case always though. HTTP API change means - change in the HTTP API - change in HTTP request path, say some version mentioned changing, or something changing in it, change in HTTP request method, change in request headers, change in request body, or change in HTTP response code, change in HTTP response headers, change in HTTP response body. The Vault HTTP API Golang Package refers to the Golang Package that provides a Golang API for the Vault's HTTP API, so that it's easy to write Golang code using the Golang API to make HTTP API calls. So it's basically a Golang Package providing a Golang API which acts as a specific HTTP Client for Vault HTTP API. Note that it's a specific HTTP Client. And, if Vault HTTP API has changes, the official Vault team will also make those changes in the Vault HTTP API Client Golang Package, so we would need those :)
+- Ensure that the documentation / docs of the tool is up to date. We are mostly referring to the `README.md` over here
+  - For example, the `usage` of the CLI tool is mentioned in the docs. Sometimes we make changes in the code but miss to update it in the docs. We need to manually fix this. Manual fixes are basic contributions. This can probably be automated too easily - so I'm putting the same idea in intermediate contribution ideas but the automation version
+  - Ensure that the tool docs contain information on the required access to run the tool. For example, the minium access required to run the tool successfully and the corresponding Vault Policy for that minimum access, so that the user is well aware of how much access is required to run the tool and more details like corresponding Vault Policy etc so that the user can ask their administrator for access to run the tool
 
 These basic ones could be automated to some extent, if there are no breaking changes in the change. So, that's also a thing one can do. As of now, it's all manual only
 
 Intermediate ones
+- Automate updating the `usage` section of the docs / documentation / `README.md` when the CLI tool code is changed. This is i
 - Automate version upgrade / update for Golang version for non breaking upgrades / updates
 - Automate version upgrade / update for Vault HTTP API Client Golang Package version for non breaking upgrades / updates
 - Add tests
   - Integration tests with actual Vault running. Maybe use some tools and/ libraries and/ frameworks for this integration test, for example https://testcontainers.com is a great library for this :)
   - Unit tests, if any is needed, for basic small functions like utility functions etc
   - E2E tests. This might look a bit similar to Integration tests in this case. But something to consider and see how we can differentiate the two
-
 - Improve performance
   - This is not too important for most cases. But sometimes people have Vault systems with lots of data that it becomes important to optimize the tools and improve their performance so that they work faster and better and also smoothly - without using up too much resources - compute, network, storage. Especially not use too much compute - CPU and yeah, not use too much RAM too. And if it does use too much CPU and RAM, and it does need to use it, it better use it pretty quickly and release it all :) So, that would mean that the execution time has to be pretty low
     - One could consider using Go Routines for speeding things up
